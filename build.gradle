@@ -10,7 +10,7 @@ buildscript {
 }
 apply plugin: 'net.minecraftforge.gradle'
 
-version = '7.7.0'
+version = '7.7.1'
 group = 'mod.lucky'
 archivesBaseName = 'lucky'
 

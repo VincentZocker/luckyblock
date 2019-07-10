@@ -1,7 +1,6 @@
 package mod.lucky.block;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import mod.lucky.Lucky;
 import mod.lucky.drop.DropFull;
@@ -20,6 +19,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.fluid.IFluidState;
 import net.minecraft.init.Enchantments;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -138,24 +138,17 @@ public class BlockLuckyBlock extends BlockContainer {
         this.removeLuckyBlock(world, player, harvestPos, false);
     }
 
-    public int getItemsToDropCount(IBlockState state, int fortune, World worldIn,
-        BlockPos pos, Random random) {
-        return 0;
+    @Override
+    public boolean removedByPlayer(IBlockState state, World world,
+        BlockPos pos, EntityPlayer player, boolean willHarvest, IFluidState fluidState) {
+
+        if (player.isCreative() && this.doCreativeDrops)
+            this.removeLuckyBlock(world, player, pos, false);
+        return true;
     }
 
     private boolean canPlaceOnBlock(IBlockState soil) {
         return soil.isTopSolid();
-            /*
-            || soit == Blocks.GRASS
-            || soil == Blocks.DIRT
-            || soil == Blocks.SAND
-            || soil == Blocks.STONE
-            || soil == Blocks.GRAVEL
-            || soil == Blocks.NETHERRACK
-            || soil == Blocks.SOUL_SAND
-            || soil == Blocks.NETHER_BRICKS
-            || soil == Blocks.END_STONE;
-             */
     }
 
     public boolean canPlaceAt(IWorld world, BlockPos pos) {
