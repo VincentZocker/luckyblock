@@ -153,7 +153,7 @@ public class EntityLuckyProjectile extends EntityArrow {
         if (this.hasImpact) {
             NBTTagList drops = new NBTTagList();
             for (int i = 0; i < this.dropProcessorImpact.getDrops().size(); i++) {
-                String dropString = this.dropProcessorTrail.getDrops().get(i).toString();
+                String dropString = this.dropProcessorImpact.getDrops().get(i).toString();
                 drops.add(new NBTTagString(dropString));
             }
             tag.setTag("impact", drops);
